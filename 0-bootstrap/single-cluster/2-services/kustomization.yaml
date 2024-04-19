@@ -76,14 +76,21 @@ resources:
 #- argocd/instances/ibm-paw.yaml
 
 # B2BI
-- argocd/instances/ibm-sfg-db2-prod.yaml
-- argocd/instances/ibm-sfg-mq-prod.yaml
-- argocd/instances/ibm-sfg-b2bi-prod-setup.yaml
-- argocd/instances/ibm-sfg-b2bi-prod.yaml
+# - argocd/instances/ibm-sfg-db2-prod.yaml
+# - argocd/instances/ibm-sfg-mq-prod.yaml
+# - argocd/instances/ibm-sfg-b2bi-prod-setup.yaml
+# - argocd/instances/ibm-sfg-b2bi-prod.yaml
 #- argocd/instances/ibm-sfg-db2-nonprod.yaml
 #- argocd/instances/ibm-sfg-mq-nonprod.yaml
 #- argocd/instances/ibm-sfg-b2bi-nonprod-setup.yaml
 #- argocd/instances/ibm-sfg-b2bi-nonprod.yaml
+
+# lightwell
+# - argocd/instances/ibm-lw-db2.yaml
+# - argocd/instances/lightwell-framework.yaml
+
+# ITXA
+# - argocd/instances/ibm-itxa-setup.yaml
 
 # Sterling Secure Proxy
 #- argocd/instances/sterling-secure-proxy-cm-instance.yaml
@@ -95,13 +102,10 @@ resources:
 #- argocd/instances/ibm-pem-setup.yaml
 #- argocd/instances/ibm-pem.yaml
 
-## Connect Direct
-#- argocd/instances/ibm-connect-direct-setup.yaml
-#- argocd/instances/ibm-connect-direct.yaml
 # SCCM
-# - argocd/instances/ibm-sccm-db2.yaml
-# - argocd/instances/ibm-sccm-setup.yaml
-# - argocd/instances/ibm-sccm.yaml
+#- argocd/instances/ibm-sccm-db2.yaml
+#- argocd/instances/ibm-sccm-setup.yaml
+#- argocd/instances/ibm-sccm.yaml
 
 # Required for IBM MQ
 #- argocd/instances/openldap.yaml
@@ -110,7 +114,7 @@ resources:
 #- argocd/instances/cert-manager-instance.yaml
 
 # Sealed Secrets
-- argocd/instances/sealed-secrets.yaml
+# - argocd/instances/sealed-secrets.yaml
 
 # CICD
 #- argocd/operators/grafana-operator.yaml
@@ -156,7 +160,7 @@ patches:
   patch: |-
     - op: add
       path: /spec/source/repoURL
-      value: https://github.com/ibm-cnt/multi-tenancy-gitops-services.git
+      value: https://github.com/ibm-cen/multi-tenancy-gitops-services.git
     - op: add
       path: /spec/source/targetRevision
       value: master
@@ -167,7 +171,7 @@ patches:
   patch: |-
     - op: add
       path: /spec/source/repoURL
-      value: https://github.com/ibm-cnt/multi-tenancy-gitops-apps.git
+      value: https://github.com/ibm-cen/multi-tenancy-gitops-apps.git
     - op: add
       path: /spec/source/targetRevision
       value: master

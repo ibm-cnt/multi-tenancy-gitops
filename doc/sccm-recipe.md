@@ -30,25 +30,18 @@ In particular, these infra resources are assumed to have already been deployed (
 ### Services - instances folder (in **multi-tenancy-gitops-services** repository)
 **NOTE:** This recipe can be implemented using a combination of storage classes. Not all combination will work, but the following table lists the storage classes that have been tested successfully:
 
-| Component | Access Mode | IBM Cloud | OCS/ODF |
-| --- | --- | --- | --- |
-| DB2 | RWO | ibmc-block-gold | ocs-storagecluster-cephfs |
-| PEM | RWX | managed-nfs-storage | ocs-storagecluster-cephfs |
+    | Component | Access Mode | IBM Cloud | OCS/ODF |
+    | --- | --- | --- | --- |
+    | DB2 | RWO | ibmc-block-gold | ocs-storagecluster-cephfs |
+    | PEM | RWX | managed-nfs-storage | ocs-storagecluster-cephfs |
 
 1. Clone the services repo for GitOps: open a terminal window and clone the `multi-tenancy-gitops-services` repository under your Git Organization.
         
     ```bash
     git clone git@github.com:${GIT_ORG}/multi-tenancy-gitops-services.git
     ```
-1. Edit the Services layer `${GITOPS_PROFILE}/2-services/kustomization.yaml` and install Sealed Secrets by uncommenting the following line, **commit** and **push** the changes and refresh the `services` Application in the ArgoCD console.
-    ```yaml
-    - argocd/instances/sealed-secrets.yaml
-    ```
 
-    >  💡 **NOTE**  
-    > Commit and Push the changes for `multi-tenancy-gitops` & sync ArgoCD. 
-
-1. Generate the yaml files for the SCCM pre-requisite components which includes the secrets and PVCs required by the SCCM helm chart.<br/>
+2. Generate the yaml files for the SCCM pre-requisite components which includes the secrets and PVCs required by the SCCM helm chart.<br/>
 **NOTE:** Make sure you are logged into your OpenShift cluster before proceeding.
 
     1. Go to the `instances/ibm-sccm-setup` directory:
@@ -119,7 +112,7 @@ In particular, these infra resources are assumed to have already been deployed (
     ```
     In order to deploy SCCM, SMTP settings are required which SCCM uses for sending emails triggered by system events based on business rules (refer: https://www.ibm.com/docs/en/control-center/6.2.1.0?topic=settings-configuring-smtp-email-messages).
 
-    ```yaml
+    ```bash
     ADMIN_EMAIL_ADDRESS=<change_me> \
     EMAIL_HOST_NAME=<change_me> \
     EMAIL_PORT=<change_me> \
@@ -132,7 +125,7 @@ In particular, these infra resources are assumed to have already been deployed (
 
     For example:
 
-    ```yaml
+    ```bash
     ADMIN_EMAIL_ADDRESS=no.reply@gmail.com \
     EMAIL_HOST_NAME=smtp.gmail.com \
     EMAIL_PORT=465 \
@@ -142,15 +135,7 @@ In particular, these infra resources are assumed to have already been deployed (
     KEY_ALIAS=self \
     ./ibm-sccm-overrides-values.sh
     ```
-    #### On the `values.yaml` Change image Tag to 
-    ```yaml
-        tag: "6.3.0.0_ifix01_2023-01-15"
-    ``` 
-    #### On the `Chart.yaml` Change the chart version to
-    ```yaml
-      - name: ibm-sccm
-        version: 3.0.0
-    ```
+
     >  💡 **NOTE**  
     > Add the generated values.yaml file to the repository, and
     > Commit and Push the changes for `multi-tenancy-gitops-services` 

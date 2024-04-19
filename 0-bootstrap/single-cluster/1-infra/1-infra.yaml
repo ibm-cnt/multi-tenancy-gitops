@@ -74,10 +74,6 @@ spec:
     server: https://kubernetes.default.svc
   - namespace: cp4ba
     server: https://kubernetes.default.svc
-  - namespace: scd
-    server: https://kubernetes.default.svc
-  - namespace: sccm
-    server: https://kubernetes.default.svc
   clusterResourceWhitelist:
   - group: ""
     kind: Namespace
